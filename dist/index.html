@@ -5,52 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <title>todo list</title>
+    <style>
+
+      .done{
+          text-decoration: line-through;
+        }
+      button {
+            background-color: blue!important;
+            border: 3px solid black;
+        }
+        
+
+    </style>
 </head>
 <body>
-    <!-- <div class=" max-w-md mx-auto mt-10 p-8 bg-white rounded-xl shadow-md">
-        <h1 class=" text-2xl font-bold mb-7">My Todos List</h1>
-        <div class="flex gap-5">
-          
-            <input class=" py-2 px-5 text-gray-500  border shadow-sm appearance-none leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="My todo">
-            <button class=" text-white bg-blue-500 py-2 px-5">ADD</button>
-        </div>
-        <div>
-           
-        </div> -->
-       
-        <div class="max-w-md mx-auto mt-10 p-8 bg-white rounded-xl shadow-md">
+    
+        <div class=" max-w-md mx-auto mt-10 p-8 bg-white rounded-xl shadow-md">
             <h2 class="text-2xl font-bold mb-4">Todo List</h2>
-            <ul>
-              <li class="flex justify-between py-2 border-b border-gray-200">
-                <span class="text-gray-700">Wake up by 6am and pray</span>
-                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">Done</button>
-              </li>
-              <li class="flex justify-between py-2 border-b border-gray-200">
-                <span class="text-gray-700">Go to BlockFuse Labs</span>
-                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">Done</button>
-              </li>
-              <li class="flex justify-between py-2 border-b border-gray-200">
-                <span class="text-gray-700">Code</span>
-                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">Done</button>
-              </li>
-              <li class="flex justify-between py-2 border-b border-gray-200">
-                <span class="text-gray-700">Exercise</span>
-                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">Done</button>
-              </li>
-              <li class="flex justify-between py-2 border-b border-gray-200">
-                <span class="text-gray-700">Play PS4</span>
-                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">Done</button>
-              </li>
-              <li class="flex justify-between py-2 border-b border-gray-200">
-                <span class="text-gray-700">Follow fine gal</span>
-                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">Pending</button>
-              </li>
-            </ul>
-            <form class="mt-4 flex justify-between">
+           
+            
+            <div class="mt-4 flex justify-between">
               <input type="text" placeholder="Add new todo" class="w-3/4 p-2 pl-10 text-sm text-gray-700 border border-gray-200 rounded-lg" />
-              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add</button>
-            </form>
-          </div>
+              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="addBtn()">Add</button>
+            </div>
+
+        </div>
           
+        <div class=" max-w-md  flex flex-col w-4/12 mx-auto p-8 bg-white">
+          <h4 class="font-bold text-[30px] flex">MY TODO LIST</h4>
+          <div id="todos"></div>
+          </div>
+
+          
+          <script>
+              let inform =document.querySelector("input")
+               let todos =document.querySelector("#todos")
+                 inform.addEventListener('input', (e) =>{
+                  console.log(e.target.value);
+                  
+                 })
+                 let addBttn = document.querySelectorAll("button")
+
+                 function addBtn (){
+                 let id = new Date().getTime
+                  let input =document.querySelector("input")
+                  let todo= document.createElement("p")
+                  todo.innerHTML = `<input type="checkbox" class="select" onclick="check(${id})" id="${id}"> <span>${input.value}</span> <button onclick="deleteTodo(${id})">Delete</button>`
+                  todos.appendChild(todo)
+                  
+                 }
+                 function check (id){
+                  let input = document.getElementById(id)
+                  let item = input.nextElementSibling;
+                  item.classList.toggle("done")
+                 }
+
+                function deleteTodo(id) {
+                  let input = document.getElementById(id)
+                  let item = input.parentElement;
+                  item.remove()
+                }
+
+          </script>
 </body>
 </html>
